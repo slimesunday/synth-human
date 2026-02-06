@@ -1,155 +1,131 @@
 # ✦ Synth.Human
 
-**AI-Powered UGC Video Generator**
+AI-generated UGC that doesn't look like AI-generated UGC.
 
-Turn any product image into viral influencer content in minutes. No actors. No studio. Just upload.
-
-![Synth.Human](https://img.shields.io/badge/Synth.Human-AI%20UGC-8b5cf6?style=for-the-badge)
+Upload a product.  
+Get an influencer video.  
+Vertical. iPhone energy. Ready to post.
 
 ---
 
-## 🚀 Quick Start
+## What this is
 
-### Option 1: Run Locally
+A pipeline for short-form UGC that passes.
+
+Just: *looks like someone filmed this in their apartment.*
+
+The whole system exists to solve the stuff generators get wrong:
+
+- product scale (why is that shoe the size of a torso)
+- identity drift (why did her face change)
+- room logic (why is the wall suddenly different)
+- tone (why does she sound like a robot)
+
+---
+
+## Quick start
 
 ```bash
-# Clone the repo
-git clone https://github.com/YOUR_USERNAME/synth-human.git
+git clone https://github.com/slimesunday/synth-human.git
 cd synth-human
-
-# Install dependencies
 pip install -r requirements.txt
-
-# Run the app
 streamlit run app.py
 ```
 
-### Option 2: Deploy to Streamlit Cloud (Free)
-
-1. Fork this repository to your GitHub
-2. Go to [share.streamlit.io](https://share.streamlit.io)
-3. Click "New app"
-4. Select your forked repo
-5. Set the main file path to `app.py`
-6. Click "Deploy"
-
-Your app will be live at: `https://YOUR-APP-NAME.streamlit.app`
+Or deploy free on [Streamlit Cloud](https://share.streamlit.io).  
+Fork → Connect → `app.py` → Done.
 
 ---
 
-## 🔑 API Keys Required
+## API keys
 
-Users need to provide their own API keys:
+You bring your own.
 
-| Service | Purpose | Get Key |
-|---------|---------|---------|
-| **fal.ai** | Image & video generation | [fal.ai/dashboard/keys](https://fal.ai/dashboard/keys) |
-| **OpenAI** | LLM (option 1) | [platform.openai.com/api-keys](https://platform.openai.com/api-keys) |
-| **Anthropic** | LLM (option 2) | [console.anthropic.com](https://console.anthropic.com/) |
-| **Google** | LLM (option 3) | [aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey) |
+| Service | What it does |
+|---------|--------------|
+| fal.ai | Image + video gen |
+| OpenAI / Anthropic / Google | LLM (pick one) |
 
----
-
-## 💰 Cost Per Video
-
-Approximately **$1.70** per video:
-
-| Service | Cost |
-|---------|------|
-| LLM calls (4 nodes) | ~$0.05 |
-| Character image | $0.15 |
-| First frame | $0.15 |
-| Last frame | $0.15 |
-| 8-second video with audio | $1.20 |
+Nothing stored: Your keys, your bill.
 
 ---
 
-## 🎬 How It Works
+## Cost
 
-1. **Upload** — Drop in your product image
-2. **Configure** — Set product name, tone, and targeting
-3. **Generate** — AI creates persona, character, frames, and video
-4. **Download** — Get your viral-ready UGC video
+~$1.70 per video.
 
-### The Pipeline
+That covers:
+- persona inference
+- character generation  
+- first + last frame
+- 8s video with speech
+
+Bad prompts cost more. Retries add up.  
+This repo exists to reduce retries.
+
+---
+
+## How it works
 
 ```
-Product Image
+Product image
      ↓
-┌─────────────────┐
-│ Persona Inference│ → Who would buy this? What's their vibe?
-└────────┬────────┘
-         ↓
-┌─────────────────┐
-│ Character Builder│ → Create a photorealistic influencer
-└────────┬────────┘
-         ↓
-┌─────────────────┐
-│ Frame Generation │ → First frame + Last frame
-└────────┬────────┘
-         ↓
-┌─────────────────┐
-│  Script Writer   │ → Natural, casual dialogue
-└────────┬────────┘
-         ↓
-┌─────────────────┐
-│ Video Generation │ → 8-second video with speech
-└────────┬────────┘
-         ↓
-    UGC Video 🎬
+Persona inference → who would post this
+     ↓
+Character gen → what they look like
+     ↓
+Keyframes → first + last frame anchors
+     ↓
+Script → 4-5 lines, filler words included
+     ↓
+Video → 8s vertical, speech, room tone
 ```
 
----
+## Configuration
 
-## ⚙️ Configuration Options
+Control:
 
-### Tone Presets
+- tone
+- age / gender / geography
+- subculture
+- custom script (if you want to override)
 
-| Tone | Style |
-|------|-------|
-| **Playful** | Humorous, self-aware, "okay the secret is literally this thing..." |
-| **Aspirational** | Confident, elevated, subtle flex |
-| **Relatable** | Warm, discovery energy, "just like you" |
-| **Edgy** | Nonchalant, cool, "idk why everyone sleeps on this" |
-| **Wholesome** | Genuine excitement, sharing with friends |
+### Tone presets
 
-### Advanced Targeting
-
-- Target age range
-- Target gender
-- Target geography
-- Target ethnicity
-- Subculture/aesthetic
-- Custom script override
+| Tone | Vibe |
+|------|------|
+| Playful | "okay so the secret is literally this thing" |
+| Aspirational | quiet flex, "elevated my routine" |
+| Relatable | "finally tried it, I get the hype" |
+| Edgy | "idk why everyone sleeps on this" |
+| Wholesome | "you guys I had to share" |
 
 ---
 
-## 🛠️ Tech Stack
+## Tech
 
-- **Frontend:** Streamlit with custom CSS
-- **Image Gen:** Nano Banana Pro (fal.ai)
-- **Video Gen:** Veo 3.1 Fast (fal.ai)
-- **LLM:** OpenAI / Anthropic / Google (user choice)
-
----
-
-## 📝 License
-
-MIT License — use it however you want.
+- Streamlit (frontend)
+- fal.ai — Nano Banana Pro (images) + Veo 3.1 Fast (video)
+- LLM — OpenAI / Anthropic / Google (swappable)
 
 ---
 
-## 🤝 Contributing
+## Roadmap
 
-PRs welcome! Feel free to:
-- Improve the prompts
-- Add new tone presets
-- Enhance the UI
-- Fix bugs
+What would matter:
+- smarter product-type routing
+- automatic failure detection  
+- fewer retries
+- less prompt bloat
+
+---
+
+## License
+
+Look, don't touch.
 
 ---
 
 <p align="center">
-  <strong>✦ Synth.Human</strong><br>
-  <sub>AI-Powered UGC Generation</sub>
+  <sub>Synth.Human — because "AI-generated" shouldn't be an insult.</sub>
 </p>
